@@ -94,6 +94,12 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    def side_step(self):
+        self.swap_item()
+        self.move_left()
+        self.swap_item()
+        self.move_right()
+
     def sort(self):
         """
         Sort the robot's list.
@@ -105,12 +111,32 @@ class SortingRobot:
         # If either item is None, return None.
         # Fill this out
 
-        def bubble_sort(arr):
-            for i in range(0, len(arr) - 1):
-                for j in range(i, len(arr)):
-                    if arr[i] > arr[j]:
-                        arr[j], arr[i] = arr[i], arr[j]
-        bubble_sort(self._list)
+        # def bubble_sort(arr):
+        #     for i in range(0, len(arr) - 1):
+        #         for j in range(i, len(arr)):
+        #             if arr[i] > arr[j]:
+        #                 arr[j], arr[i] = arr[i], arr[j]
+        # bubble_sort(self._list)
+
+        # Now, with robot methods!
+
+        while not self.light_is_on():  # exit condition
+            self.set_light_on()
+            while self.can_move_right():  # will loop until end of list
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() == 1:  # array swapping!
+                    # side_step swaps adjacent elements
+                    self.side_step()
+                    self.set_light_off()  # exit the loop
+                else:
+                    # side_step except doesn't swap the elements
+                    self.move_left()
+                    self.swap_item()
+                    self.move_right()
+            if not self.light_is_on():
+                while self.can_move_left():
+                    self.move_left()
 
 
 if __name__ == "__main__":
