@@ -50,7 +50,10 @@ Suppose that you have an _n_-story building and plenty of eggs. Suppose also tha
 Write out your proposed algorithm in plain English or pseudocode and give the runtime complexity of your solution.
 
 
-function eggs(n):
-	_f_ = n
+divide and conquer, binary
 
-time complexity: O(1)
+I would start at floor n / 2. If the egg broke, I would go to n / 4. If it still broke, I would go to n / 8. Essentially a binary search, where the most possible steps to find the solution would be n / 2
+
+
+
+time complexity: O(log n)
